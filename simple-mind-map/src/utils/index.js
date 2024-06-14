@@ -14,11 +14,12 @@ export const walk = (
   afterCallback,
   isRoot,
   layerIndex = 0,
-  index = 0
+  index = 0,
+  count = 1
 ) => {
   let stop = false
   if (beforeCallback) {
-    stop = beforeCallback(root, parent, isRoot, layerIndex, index)
+    stop = beforeCallback(root, parent, isRoot, layerIndex, index, count)
   }
   if (!stop && root.children && root.children.length > 0) {
     let _layerIndex = layerIndex + 1
@@ -30,7 +31,8 @@ export const walk = (
         afterCallback,
         false,
         _layerIndex,
-        nodeIndex
+        nodeIndex,
+        root.children.length
       )
     })
   }
